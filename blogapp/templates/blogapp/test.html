@@ -1,0 +1,595 @@
+<style>
+    .container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    .container1 {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden; /* Clear floats */
+    }
+
+    .column {
+        flex-basis: 50%; /* Adjust width according to your needs */
+        padding: 5px;
+        border-radius: 25px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .column1 {
+        flex-basis: calc(50% - 20px); /* Two columns per row */
+        padding: 5px;
+        width: 7.5rem;
+        border-radius: 25px;
+        box-sizing: border-box;
+        height: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .column {
+            flex-basis: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    .welcome-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(3px);
+    }
+
+    .welcome-box {
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.13);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.9);
+        max-width: 400px;
+    }
+
+    .welcome-text {
+        font-size: 12px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: pre-wrap;
+        border-right: 3px solid;
+        display: inline-block;
+        vertical-align: bottom;
+        font-family: sans-serif;
+    }
+
+    body {
+        background-image: url('{% static "img/backs.jpeg" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .color-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+    }
+
+    .bg-purple {
+        background-color: green;
+    }
+
+    .card-text {
+        overflow-wrap: break-word;
+    }
+
+    .blinking-indicator {
+        animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .slide-in-text {
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        font-size: 24px;
+        color: navy;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .chatbot-toggler {
+        position: fixed;
+        bottom: 30px;
+        right: 35px;
+        outline: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: navy;
+        transition: all 0.2s ease;
+    }
+
+    body.show-chatbot .chatbot-toggler {
+        transform: rotate(90deg);
+    }
+
+    .chatbot-toggler span {
+        color: #fff;
+        position: absolute;
+    }
+
+    .chatbot-toggler span:last-child,
+    body.show-chatbot .chatbot-toggler span:first-child {
+        opacity: 0;
+    }
+
+    body.show-chatbot .chatbot-toggler span:last-child {
+        opacity: 1;
+    }
+
+    .chatbot {
+        position: fixed;
+        right: 35px;
+        bottom: 90px;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.5);
+        transform-origin: bottom right;
+        box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+        0 32px 64px -48px rgba(0, 0, 0, 0.5);
+        transition: all 0.1s ease;
+    }
+
+    body.show-chatbot .chatbot {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+
+    .chatbox .chat p.error {
+        color: #721c24;
+        background: #f8d7da;
+    }
+
+    .mind {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header-ne {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card-header-ne .title {
+        vertical-align: middle;
+    }
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .timer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+    }
+
+    .timer span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 4px;
+        margin: 0 5px;
+        text-align: center;
+        line-height: 40px;
+    }
+
+    .labels {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .labels span {
+        margin: 0 5px;
+    }
+
+    .days, .hours, .minutes, .seconds {
+        animation: countdown 1s linear infinite;
+    }
+
+    @keyframes countdown {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .column {
+        flex: 4;
+        padding: 10px;
+        border: 0px solid #ccc;
+        margin: 0px;
+    }
+
+</style>
+
+<script>
+    // Validate username
+    $('#login-form').submit(function (e) {
+        // e.preventDefault();
+        $('#login-btn').addClass('disabled');
+        $('#login-btn').html('<i class="fas fa-sign-in-alt"></i> Signing you in . . .');
+    });
+
+    $("#username").on("input", function () {
+        let username = $(this).val();
+
+        $.ajax({
+            url: "/accounts/ajax/validate-username/",
+            data: {
+                username: username
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.is_taken) {
+                    $('#message-wrapper').html(`<p class="my-2 text-danger"><span class="bg-error p-2"><b>${username}</b> already taken :( try another one </span></p>`);
+                } else {
+                    $('#message-wrapper').html(`<p class="my-2 text-success"><span class="bg-correct p-2"><b>${username}</b> is valid </span></p>`);
+                }
+            }
+        });
+    });
+
+    // Countdown timer script
+    let countdownDate = localStorage.getItem('countdownDate');
+
+    if (!countdownDate) {
+        countdownDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days in milliseconds
+        localStorage.setItem('countdownDate', countdownDate);
+    } else {
+        countdownDate = parseInt(countdownDate);
+    }
+
+    const countdownTimer = setInterval(() => {
+        const now = new Date().getTime();
+        const timeRemaining = countdownDate - now;
+
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        document.querySelector('.days').innerHTML = days;
+        document.querySelector('.hours').innerHTML = hours;
+        document.querySelector('.minutes').innerHTML = minutes;
+        document.querySelector('.seconds').innerHTML = seconds;
+
+        if (timeRemaining <= 0) {
+            clearInterval(countdownTimer);
+            localStorage.removeItem('countdownDate');
+        }
+    }, 1000);
+
+    // Tooltip
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    // Scroll to top
+    $('#backToTop').on('click', function (e) {
+        $('html, body').animate({scrollTop: 0}, '300');
+    });
+
+    // Form validation
+    $('#myForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const formData = $(this).serialize();
+
+        $.ajax({
+            url: '/submit-form',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                $('#response').text(response.message);
+            },
+            error: function (error) {
+                $('#response').text('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    // Owl Carousel
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    });
+
+    // Preloader
+    $(window).on('load', function () {
+        $('#preloader').delay(1500).fadeOut('slow');
+        $('body').delay(1500).css({'overflow': 'visible'});
+    });
+
+    // Sticky Header
+    window.onscroll = function () {
+        var header = document.querySelector('.header');
+        if (window.scrollY > 50) {
+            header.classList.add('sticky');
+        } else {
+            header.classList.remove('sticky');
+        }
+    };
+</script>
+<script>
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const closeBtn = document.querySelector(".close-btn");
+    const chatbox = document.querySelector(".chatbox");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector(".chat-input span");
+
+    let userMessage = null; // Variable to store user's message
+    const API_KEY = "PASTE-YOUR-API-KEY"; // Paste your API key here
+    const inputInitHeight = chatInput.scrollHeight;
+
+    const createChatLi = (message, className) => {
+        // Create a chat <li> element with passed message and className
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", `${className}`);
+        let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+        chatLi.innerHTML = chatContent;
+        chatLi.querySelector("p").textContent = message;
+        return chatLi; // return chat <li> element
+    }
+
+    const generateResponse = (chatElement) => {
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+        const messageElement = chatElement.querySelector("p");
+
+        // Define the properties and message for the API request
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: userMessage }],
+            })
+        }
+
+        // Send POST request to API, get response and set the response as paragraph text
+        fetch(API_URL, requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                messageElement.textContent = data.choices[0].message.content.trim();
+            })
+            .catch(() => {
+                messageElement.classList.add("error");
+                messageElement.textContent = "Oops! Something went wrong. Please try again. Or Contact Admin @07062390730";
+            })
+            .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+    }
+
+    const handleChat = () => {
+        userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+        if (!userMessage) return;
+
+        // Clear the input textarea and set its height to default
+        chatInput.value = "";
+        chatInput.style.height = `${inputInitHeight}px`;
+
+        // Append the user's message to the chatbox
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+
+        setTimeout(() => {
+            // Display "Typing..." message while waiting for the response
+            const incomingChatLi = createChatLi("Typing...", "incoming");
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+            generateResponse(incomingChatLi);
+        }, 600);
+    }
+
+    chatInput.addEventListener("input", () => {
+        // Adjust the height of the input textarea based on its content
+        chatInput.style.height = `${inputInitHeight}px`;
+        chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
+
+    chatInput.addEventListener("keydown", (e) => {
+        // If Enter key is pressed without Shift key and the window
+        // width is greater than 800px, handle the chat
+        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
+
+    sendChatBtn.addEventListener("click", handleChat);
+    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+</script>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const text = "Hello! Classify your novel into an experience, Let's get started!";
+        const welcomeTextElement = document.getElementById('welcomeText');
+        animateText(text, welcomeTextElement);
+    });
+
+    function animateText(text, element) {
+        let index = 0;
+        const typingSpeed = 100;
+        const interval = setInterval(function() {
+            element.innerHTML += text[index];
+            index++;
+            element.parentElement.scrollTop = element.parentElement.scrollHeight;
+            if (index === text.length) {
+                clearInterval(interval);
+            }
+        }, typingSpeed);
+    }
+
+    window.addEventListener('load', function() {
+        document.getElementById('loadingScreen').style.display = 'none';
+    });
+
+    function closeWelcomeBox() {
+         document.getElementById('welcomeOverlay').style.display = 'none';
+    }
+
+</script>
+
+
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery if not already included -->
+                                <script>
+                                    $(document).ready(function () {
+                                        $('.read-more-button').on('click', function () {
+                                            $(this).hide(); // Hide the "Read More" button
+                                            $(this).siblings('.end-button').show(); // Show the "End" button
+                                        });
+
+                                        $('.end-button').on('click', function () {
+                                            $(this).hide(); // Hide the "End" button
+                                            $(this.getAttribute('href')).collapse('hide'); // Hide the expanded content
+                                            $(this).siblings('.read-more-button').show(); // Show the "Read More" button
+                                        });
+                                    });
+                                </script>
+
+<!-- Fonts for Material Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+
+<script src="script.js" defer></script>
+
+
+
+
+
+
+<<<<<<<<<<
+<style>
+.marquee-container {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    background-color: none;
+}
+.marquee-container2 {
+    display: none;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee 50s linear infinite;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(50%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Style for mobile devices */
+@media only screen and (max-width: 600px) {
+.marquee-container {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: none;
+    background-color: none;
+}
+.marquee-container2 {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+
+}
+   .marquee-content {
+        animation: marquee-mobile 50s linear infinite;
+    }
+    @keyframes marquee-mobile {
+        0%   { transform: translateX(50%); }
+        100% { transform: translateX(-100%); }
+    }
+}
+</style>

@@ -1,0 +1,985 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>EASY-JAY TECHNOLOGIES</title>
+{% endblock title %}
+
+{% block content %}
+    {% load static %}
+<style>
+    .ti {
+     color: white;
+    }
+</style>
+            <div style="padding-top: 10px;"></div>
+    <form class="search-form" action="{% url 'index' %}" method="GET">
+        <div class="search-container">
+            <input type="text" id="primary-search" name="keyword" placeholder="Search By Categories... " value="{{ search_query }}">
+            <button class="btn2" type="submit">
+                <span class="fas fa-search"></span>
+            </button>
+        </div>
+    </form>
+        {% if search_query %}
+            <div class="col-md-12">
+                <p><strong style="color:white;">{{ num_results }} Results for: {{ search_query }}</strong></p>
+            </div>
+        {% endif %}
+            <div style="padding-top: 25px;"></div>
+
+<section id="school-web">
+    <div style="position: absolute; width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+    <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+        <div class="ti col-md-12"><strong>School website Templates</strong></div>
+        {% for blog in blog_filters.school %}
+            <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                    <div class="containerimg mb-1">
+                        <img class="" src="{{blog.image.url}}" alt="..." />
+                        <div><i class="overlay h4">{{blog.title}}</i></div>
+                    </div>
+                    <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                        <div class="small text-muted">{{blog.publish}}</div>
+                        <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                        <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                href="{{blog.get_absolute_url}}">
+                            View The Range
+                        </i></a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                </div><div class="row" style="padding: 0px 30px;"> <!-- Start a new row -->
+            {% endif %}
+        {% empty %}
+            <div class="col-md-12">
+                <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+    <section id="shopping-mall-web">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Shopping Cart Website Templates</strong>
+            {% for blog in blog_filters.shop %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+
+            {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    </section>
+    <section id="social">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Social Media web Design Templates</strong>
+                {% for blog in blog_filters.social %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+    </div>
+    </section>
+    <section id="bank">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Banking web Design Templates</strong>
+                {% for blog in blog_filters.block %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+    </section>
+        <section id="real">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Real Estate web Design Templates</strong>
+                {% for blog in blog_filters.real %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+        </section>
+        <section id="fashion">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Fashion web Design Templates</strong>
+                {% for blog in blog_filters.fashion %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+ </section>
+ <section id="hotel">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Hotel web Design Templates</strong>
+                {% for blog in blog_filters.hotel %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+        </section>
+ <section id="mobile">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Mobile Development</strong>
+                {% for blog in blog_filters.mobile %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+        </section>
+ <section id="web">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Web App Development</strong>
+                {% for blog in blog_filters.appdev %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+        </section>
+<section id="cross">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Cross-Platform APP Development</strong>
+        {% for blog in blog_filters.cross %}
+            <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                    <div class="containerimg mb-1">
+                        <img class="" src="{{blog.image.url}}" alt="..." />
+                        <div><i class="overlay h4">{{blog.title}}</i></div>
+                    </div>
+                    <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                        <div class="small text-muted">{{blog.publish}}</div>
+                        <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                        <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                href="{{blog.get_absolute_url}}">
+                            View The Range
+                        </i></a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+        {% empty %}
+            <div class="col-md-12">
+                <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+            </div>
+        {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="seo">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Search Engine Optimization (SEO)</strong>
+                {% for blog in blog_filters.seo %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="smm">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Social Media Marketing (SMM)</strong>
+                {% for blog in blog_filters.smm %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="email">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Email Marketing</strong>
+                {% for blog in blog_filters.emailing %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="pcc">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Pay-Per-Click Advertising (PPC)</strong>
+                {% for blog in blog_filters.pcc %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="cont">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Content Marketing</strong>
+                {% for blog in blog_filters.cont %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="influnce">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Influencer Marketing</strong>
+                {% for blog in blog_filters.others_mark %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="affiliate">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Affiliate Marketing</strong>
+                {% for blog in blog_filters.prod %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="erp">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Affiliate Marketing</strong>
+                {% for blog in blog_filters.prod %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="crm">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Enterprise Resource Planning (ERP) Systems</strong>
+                {% for blog in blog_filters.crm %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="cms">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Customer Relationship Management (CRM) Software</strong>
+                {% for blog in blog_filters.cms %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="cloud">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Cloud-Based Solutions</strong>
+                {% for blog in blog_filters.cloud %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="bi">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Business Intelligence (BI) and Analytics Tools</strong>
+                {% for blog in blog_filters.bi %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="cyber">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Cybersecurity Solutions</strong>
+                {% for blog in blog_filters.cysec %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+<section id="iot">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> IoT (Internet of Things) Solutions</strong>
+                {% for blog in blog_filters.iot %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+<section id="res">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Research</strong>
+                {% for blog in blog_filters.tips %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+<section id="guide">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong> Guides</strong>
+                {% for blog in blog_filters.guide %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+</section>
+
+ <section id="other">
+    <div style="position: absolute;  width: 100%; height: 10%; background: linear-gradient(to top, rgba(0,0,0,0),
+    rgba(0,0,0,0), rgba(0,0,0,0), rgba(9,0,0,0.5), rgba(9,0,0,3.5));"></div>
+
+        <div class="row" style="padding: 0px 30px;"> <!-- Adjusted padding here -->
+            <div class="ti col-md-12"><strong>Recent from blogs</strong>
+                {% for blog in blog_filters.others %}
+                <div class="col-md-3" style="padding: 5px; padding-right: 5px;"> <!-- Adjusted padding here -->
+                    <div style="border-radius: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div class="containerimg mb-1">
+                            <img class="" src="{{blog.image.url}}" alt="..." />
+                            <div><i class="overlay h4">{{blog.title}}</i></div>
+                        </div>
+                        <div class="card-body" style="padding: 10px;"> <!-- Adjusted padding here -->
+                            <div class="small text-muted">{{blog.publish}}</div>
+                            <p class="card-text">{{blog.body | truncatechars:"50"}}</p>
+                            <a class="fas fa-box-open" href="{{blog.get_absolute_url}}"> > <i class="button"
+                                    href="{{blog.get_absolute_url}}">
+                                View The Range
+                            </i></a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                {% endif %}
+
+                {% empty %}
+                <div class="col-md-12">
+                    <p>No results found for: <strong style="color:red;">{{ search_query }}</strong></p>
+                </div>
+            {% endfor %}
+    </div>
+        </div>
+        </section>
+</div>
+
+<script>
+    const searchInput = document.getElementById('primary-search');
+    const searchInput = document.getElementById('primary-search');
+
+    searchInput.addEventListener('input', () => {
+        if (searchInput.value.trim() !== '') {
+            searchInput.style.borderColor = 'red'; // Change the border color to red
+        } else {
+            searchInput.style.borderColor = '#ccc'; // Restore the default border color
+        }
+    });
+</script>
+<style>
+        .search-container {
+            position: relative;
+            width: 80%; /* Adjust width as needed */
+            margin: 0 auto; /* Center the container */
+            border-radius: 25px;
+            background-color: #263835;;
+        }
+
+        #primary-search {
+            width: calc(100% - 40px);
+            padding-right: 40px; /* Adjust padding to accommodate the search icon */
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+
+        }
+
+        .btn2 {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 100%;
+            border: none;
+            color: white;
+            background-color: transparent;
+            cursor: pointer;
+
+</style>
+
+{% endblock content %}

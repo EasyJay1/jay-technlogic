@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Profile - {{user_profile.user.username}}</title>
+   <!-- <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> -->
+
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+</head>
+<body>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+<div class="icon-container text-center" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+opacity: 0.8; z-index: 111; background-color: gray; padding: 10px; border-radius: 10px;">
+    <a href="#" class="text-white mx-3" id="voice-call-button">
+        <i class="fa fa-phone fa-2x"></i> <!-- Increase icon size -->
+    </a>
+<!-- HTML -->
+<a href="#" class="text-white mx-3" id="video-call-button">
+    <i class="fa fa-video-camera fa-2x"></i> <!-- Increase icon size -->
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const callPopup = document.getElementById('call-popup');
+    const voiceCallButton = document.getElementById('voice-call-button');
+    const callFeed = document.getElementById('call-feed');
+    const spinningText = document.getElementById('spinning2');
+
+    // Function to show the call popup
+    function showCallPopup() {
+        callPopup.classList.remove('hidden');
+        spinningText.classList.add('blinking'); // Add blinking animation
+        navigator.mediaDevices.getUserMedia({ audio: true }) // Request microphone access
+            .then(stream => {
+                callFeed.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Microphone access denied:', error);
+            });
+    }
+
+    // Function to hide the call popup
+    function hideCallPopup() {
+        callPopup.classList.add('hidden');
+        spinningText.classList.remove('blinking'); // Remove blinking animation
+    }
+
+    // Event listener for voice call button click
+    voiceCallButton.addEventListener('click', function () {
+        showCallPopup();
+    });
+
+    // Event listener for close button click
+    document.querySelector('.close-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        hideCallPopup();
+    });
+});
+</script>
+
+<style>
+    .blinking {
+        animation: blink-animation 1s infinite; /* Blinking animation */
+    }
+
+    @keyframes blink-animation {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const videoPopup = document.getElementById('video-popup');
+    const videoCallButton = document.getElementById('video-call-button');
+    const video = document.getElementById('camera-feed');
+
+    // Function to show the video popup
+    function showVideoPopup() {
+        videoPopup.classList.remove('hidden');
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Camera access denied:', error);
+            });
+    }
+
+    // Function to hide the video popup
+    function hideVideoPopup() {
+        videoPopup.classList.add('hidden');
+        if (video.srcObject) {
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+            video.srcObject = null;
+        }
+    }
+
+    // Event listener for video call button click
+    videoCallButton.addEventListener('click', function () {
+        showVideoPopup();
+    });
+
+    // Event listener for close button click
+    document.querySelector('.close-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        hideVideoPopup();
+    });
+});
+</script>
+
+    <a href="#" class="text-white mx-3">
+        <i class="fa fa-envelope fa-2x"></i> <!-- Increase icon size -->
+    </a>
+
+</div>
+<div id="call-popup" class="hidden">
+    <a class="close-button" href="{% url 'index' %}">End</a>
+    <h2 class="overlay-text" href="">
+        Voice Calling {{ user_profile.user.username }}<span id="spinning2"> ...</span>
+    </h2>
+    <audio id="call-feed" style="border-radius: 8px;" autoplay></audio>
+</div>
+
+<div id="video-popup" class="hidden">
+    <a class="close-button" href="">End</a>
+    <h2 class="overlay-text" href="">
+		Video Calling {{user_profile.user.username}}<span id="spinning"> >>></span>
+	</h2>
+
+    <video id="camera-feed" style="border-radius: 8px;" autoplay></video>
+</div>
+
+	<style>
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+#spinning {
+    animation: blink 1s infinite;
+}
+
+</style>
+
+<style>
+
+.overlay-text {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+	#call-popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's on top */
+    background-color: gray; /* Background color for the popup */
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+
+	}
+	#video-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's on top */
+    background-color: gray; /* Background color for the popup */
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+   }
+.hidden {
+    display: none !important; /* Utility class to hide elements */
+}
+
+.close-button {
+	border-radius: 15px;
+    padding: 2px 5px;
+    top: 5px;
+    float: right;
+    background: red;
+    font-size: 16px;
+    color: white; /*
+}
+
+#camera-feed {
+    width: 100%;
+    height: auto;
+}
+
+</style>
+
+					<span style="color: white; font-size: 15px; margin-right: 50px;"><b><u><a href="/">Home</a></u></b></span>
+
+	</div>
+
+	<section>
+			<div class="feature-photo">
+				<figure><img src="{% static 'images/resources/timeline-1.jpg' %}" alt=""></figure>
+				<form action="/follow" method="POST">
+					{% csrf_token %}
+					<div class="add-btn">
+					<a  href="{% url 'open_messages' %}" class="text-white mx-3">
+						<i class="fa fa-bell fa-2x"></i> <!-- Increase icon size -->
+					</a>
+
+					{% if user_post_length == 0 %}
+					<span style="color: white; font-size: 15px;"><b>No Post</b></span>
+					{% elif user_post_length == 1 %}
+					<span style="color: white; font-size: 15px;"><b>{{user_post_length}} Post</b></span>
+					{% else %}
+					<span style="color: white; font-size: 15px;"><b>{{user_post_length}} Posts</b></span>
+					{% endif %}
+
+					{% if user_followers == 0 or user_followers == 1 %}
+					<span style="color: white; font-size: 15px;"><b>{{user_followers}} follower</b></span>
+					{% else %}
+					<span style="color: white; font-size: 15px;"><b>{{user_followers}} followers</b></span>
+					{% endif %}
+
+
+					<span style="color: white; font-size: 15px;"><b>{{user_following}} following</b></span>
+
+					<input type="hidden" value="{{user.username}}" name="follower" />
+					<input type="hidden" value="{{user_object.username}}" name="user" />
+					</div>
+				</form>
+
+				<!-- <form class="edit-phto">
+					<i class="fa fa-camera-retro"></i>
+					<label class="fileContainer">
+						Upload Cover Photo
+					<input type="file"/>
+					</label>
+				</form> -->
+				<div class="container-fluid">
+					<div class="row merged">
+						<div class="col-lg-2 col-sm-3">
+							<div class="user-avatar">
+								<figure>
+									<img src="{{user_profile.profileimg.url}}" style="height: 250px; width: 100%;" alt="">
+									<!-- <form class="edit-phto">
+										<i class="fa fa-camera-retro"></i>
+										<label class="fileContainer">
+											<a href="#account-settings">Upload Profile Photo</a>
+										</label>
+									</form> -->
+								</figure>
+							</div>
+						</div>
+						<div class="col-lg-10 col-sm-9">
+							<div class="timeline-info">
+								<ul>
+									<li class="admin-name">
+									  <h5 style="color: black;white-space: nowrap; width: 110px; font-size: 15px;"><b>@{{user_profile.user.username}}</b><br>
+
+					{% if user_object.username == user.username %}
+					<a href="/settings" data-ripple="">Account Settings</a>
+					{% else %}
+					<a data-ripple=""><button type="submit" style="background-color: #ffc0cb; border: #ffc0cb;">{{button_text}}</button></a>
+					{% endif %}
+							<!--<i class="fa fa-check-circle" style="color: #48dbfb;" aria-hidden="true"></i>--></h5>
+									  <!--<span>Group Admin</span>-->
+									</li>
+									<!--<li>
+										<a class="" href="javascript:void(0)" title="" data-ripple="">Go live!</a>
+										<a class="" href="javascript:void(0)" title="" data-ripple="">Music</a>
+										<a class="" href="emporium/index-3.html" title="" data-ripple="">Emporium</a>
+										<a class="" href="fitness/index.html" title="" data-ripple="">Health Inspection</a>
+										<a class="" href="settings/account-setting.html" title="" data-ripple="">Settings</a>
+										<a class="" href="javascript:void(0)" title="" data-ripple="">Upload</a>
+										<a class="" href="time-line.html" title="" data-ripple="">time line</a>
+										<a class="" href="timeline-photos.html" title="" data-ripple="">Photos</a>
+										<a class="" href="timeline-videos.html" title="" data-ripple="">Videos</a>
+										<a class="" href="timeline-friends.html" title="" data-ripple="">Friends</a>
+										<a class="" href="timeline-groups.html" title="" data-ripple="">Groups</a>
+										<a class="" href="about.html" title="" data-ripple="">about</a>
+										<a class="" href="#" title="" data-ripple="">more</a>
+
+									</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- top area -->
+		<section>
+			<div class="bio">
+					{{user_profile.bio}}
+			</div>
+		</section>
+
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+
+
+
+								</aside>
+							</div><!-- sidebar -->
+
+
+
+
+
+
+
+
+
+
+							<div class="col-lg-6">
+								<div class="central-meta">
+									<ul class="photos">
+
+										{% for post in user_posts %}
+										<li>
+											<a class="strip" href="{{post.image.url}}" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
+												<img src="{{post.image.url}}" style="height: 250px; width: 300px;" alt=""></a>
+										</li>
+										{% endfor %}
+
+
+
+									</ul>
+									<!--<div class="lodmore"><button class="btn-view btn-load-more"></button></div>-->
+								</div><!-- photos -->
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+
+								</aside>
+							</div><!-- sidebar -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{% static 'js/main.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+
+<!-- Example usage in a template -->
+<div class="unread-message-container">
+    {% if unread_message_count %}
+        <a href="{% url 'open_messages' %}"><span  class="unread-message-count">{{ unread_message_count }}</span></a>
+        <i class="fa fa-envelope">Read All</i>
+    {% else %}
+        <p class="unread-message-count">No messages.</p>
+    {% endif %}
+</div>
+<style>
+    .unread-message-container {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.unread-message-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    margin-right: 5px;
+}
+
+</style>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+{% load humanize %} <!-- Load the humanize template tags -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message List</title>
+</head>
+<body>
+
+<div class="">
+    <a class="close-button" href="/"> Close</a>
+    <h2 class="overlay-text" href="">
+		Inbox
+	</h2>
+
+	<ul>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.is_read %}
+					<a href="{% url 'open_message' message.id %}">
+						<li>✔ <span style="color: gray; background-color: white; padding: 2px; border-radius: 10px;"
+						>Sender: {{ message.user }}</span> | {{ message.title }} <br> {{ message.content|truncatechars:20 }}</li>
+						<i>{{ message.created_at }}</i>
+					</a>
+<hr>
+				{% else %}
+					<a href="{% url 'open_message' message.id %}">
+						<li style="color: white; list-style-type: none;"><strong>*
+						<span style="color: gray; background-color: white; padding: 2px; border-radius: 10px;"
+						>Sender: {{ message.user }}</span> | {{ message.title }}  <br> {{ message.content|truncatechars:20 }}
+						</strong></li>
+						<i>{{ message.created_at }}</i>
+					</a>
+<hr>
+				{% endif %}
+			{% endfor %}
+		{% else %}
+			<li>No messages available.</li>
+		{% endif %}
+	</ul>
+</div>
+</body>
+{% endblock content %}
+
+</html>
+
+
+
+
+
+
+
+

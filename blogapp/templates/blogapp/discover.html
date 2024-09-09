@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover the Code</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <i>Discover the Code: Unraveling the Mysteries of Programming</i>
+    </header>
+    <main>
+        <section id="introduction">
+            <h2>Deciphering the Language of Computers</h2>
+            <p>Programming is often likened to learning a new language, but with a twist - it's a language understood by machines rather than humans...</p>
+        </section>
+        
+        <section id="innovation">
+            <h2>The Gateway to Innovation</h2>
+            <p>Understanding programming unlocks a world of possibilities. It empowers individuals to create, innovate, and solve problems in ways previously unimaginable...</p>
+        </section>
+
+        <section id="creativity">
+            <h2>Embracing Creativity and Logic</h2>
+            <p>Contrary to popular belief, programming is not just about numbers and logic; it's also a creative endeavor...</p>
+        </section>
+
+        <section id="barriers">
+            <h2>Breaking Down Barriers</h2>
+            <p>One of the most remarkable aspects of programming is its inclusivity. Regardless of age, background, or location, anyone with access to a computer and the internet can learn to code...</p>
+        </section>
+
+        <section id="learning">
+            <h2>Continuous Learning and Growth</h2>
+            <p>In the world of technology, change is constant. New programming languages, frameworks, and tools emerge regularly, challenging developers to adapt and evolve continually...</p>
+        </section>
+
+        <section id="join">
+            <h2>Join the Journey</h2>
+            <p>Whether you're a seasoned developer or a curious novice, the journey to "Discover the Code" is both rewarding and enriching...</p>
+        </section>
+    </main>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+
+</style>
+</body>
+{% endblock %}
+
+</html>

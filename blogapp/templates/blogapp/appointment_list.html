@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment List</title>
+</head>
+<body>
+    <h1>Appointment List</h1>
+    <ul>
+        {% for appointment in object_list %}
+            <li>{{ appointment.location }} - {{ appointment.booked_for }} {% if appointment.is_booked %}
+                (✔){% else %} (Queuing...)<a href="{% url 'appointment_update' pk=appointment.pk %}"> Edit</a>{% endif %}</li>
+
+
+        {% empty %}
+            <li>No appointments available.</li>
+        {% endfor %}
+    </ul>
+        <a href="{% url 'appointment_create' %}">Create New Appointment</a>
+
+</body>
+
+{% endblock %}
+</html>

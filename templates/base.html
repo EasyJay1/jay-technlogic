@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>  <!-- Bootstrap for close btn CSS -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <!-- Bootstrap for drop-down btn CSS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts/icomoon/style.css' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="pos-f-t">
+        <section class="nav-overlay" id="Nav-overlay"></section>
+        <nav class="navbar">
+            <div class="navbar-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <div class="navbar-brand"></div>
+            <div class="navbar-menu">
+                <ul class="navbar-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">API Plugins</a></li>
+                    <li><a href="/">Academy</a></li>
+                    <li><a href="/">Tours </a> </li>
+                </ul>
+            </div>
+            <footer class="footer-wrapper">
+                <div class="icon-list">
+                    <div class="icon-links">
+                        <a href="#" target="_blank">
+                            <img class="icon-link" loading="lazy" alt="Link 1" src="{% static 'images/public/item--link.svg' %}" />
+                        </a>
+                        <a href="#" target="_blank">
+                            <img class="icon-link" loading="lazy" alt="Link 2" src="{% static 'images/public/item--link-1.svg' %}" />
+                        </a>
+                        <a href="#" target="_blank">
+                            <img class="icon-link" loading="lazy" alt="Link 3" src="{% static 'images/public/item--link-2.svg' %}" />
+                        </a>
+                        <a href="#" target="_blank">
+                            <img class="icon-link" loading="lazy" alt="Link 4" src="{% static 'images/public/item--link-3.svg' %}" />
+                        </a>
+                    </div>
+                </div>
+            </footer>
+            <div class="setting">
+                {% if user.is_authenticated %}
+                <nav class="navbar2">
+                    <div class="dropdown2">
+                        <i class="nav-link fas fa-cog" href="#" id="servicesDropdownp" role="button" data-toggle="dropdown" style="color:white;" aria-haspopup="true" aria-expanded="false">
+                            {{ request.user.last_name|slice:"-1:" }}
+                        </i>
+                        <div class="dropdown-menu details" aria-labelledby="servicesDropdownp">
+                            <a class="fas fa-book" href="/"> My ticket(s)</a><br>
+                            <a class="fas fa-user-alt" href="{% url 'account_change_password' %}"> Change Password</a><br>
+                            <hr>
+                            <a class="fas fa-sign-out-alt" href="{% url 'account_logout' %}"> Sign Out</a>
+
+                                {% if request.user.is_staff %}
+                            <a class="fas " href="/"> Ticket Checker</a>
+                                {% endif %}
+
+                            <hr style="color:white;">
+                            <div>
+                                <i class="" style="color: red;">
+                                    Yo! {{ user.first_name }} {{ user.last_name }}
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="">
+                        <a href="{% url 'account_login' %}" class="login-link">
+                            <div class="icon-container">
+                                <i class="fas fa-user"> Login</i>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                </nav>
+            </div>
+        </nav>
+    </div>
+
+
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {% elif message.tags == 'error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {% elif message.tags == 'warning' %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {% else %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+          {% endif %}
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+
+
+<style>
+    /* Alert Styles */
+    .alert {
+        position: fixed;
+        top: 20px;
+        z-index: 9999;
+        left: 50%;
+        transform: translateX(-50%);
+        color: navy;
+        opacity: 90%;
+        padding: 10px;
+        font-weight: bold;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        width: 50%;
+        text-align: center;
+    }
+
+    /* Navbar Styles */
+    .navbar2 {
+        display: flex;
+        justify-content: flex-end; /* Ensures items are aligned to the right */
+    }
+
+    /* Dropdown Menu Styles */
+    .dropdown2 {
+        position: relative;
+    }
+
+    .dropdown-menu.details {
+        position: absolute;
+        left: -200%; /* Positions the drop-down menu to the right */
+        top: 100%;
+        padding: 10px;
+        display: none; /* Initially hidden */
+    }
+
+    .dropdown-menu.details.show {
+        display: block; /* Shows the drop-down menu when triggered */
+    }
+
+    .nav-link {
+        cursor: pointer;
+    }
+
+    /* Cookie Popup */
+    #cookie-popup {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        z-index: 9999;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: AliceBlue;
+        color: navy;
+        width: 80%;
+        opacity: 90%;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Button inside Popups */
+    .btn2 {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 100%;
+        border: none;
+        color: white;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    /* Fixed Top Position for Navigation */
+    .pos-f-t {
+        position: fixed;
+        top: 0px;
+        z-index: 9999;
+        width: 100%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 1.15);
+    }
+
+    /* Index Row */
+    .index-row {
+        height: auto;
+        background-image: url('/static/images/public/bv.webp');
+        background-size: cover;
+        padding: 0px 0px;
+    }
+
+    /* Welcome Overlay */
+    .welcome-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(3px);
+    }
+
+    /* Welcome Box */
+    .welcome-box {
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.13);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.9);
+        max-width: 400px;
+    }
+
+    /* Welcome Text */
+    .welcome-text {
+        font-size: 12px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: pre-wrap;
+        border-right: 3px solid;
+        display: inline-block;
+        vertical-align: bottom;
+        font-family: sans-serif;
+    }
+
+    /* Animation for Blinking Cursor */
+    @keyframes blink-caret {
+        from,
+        to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: black;
+        }
+    }
+
+    /* Blur Effect for Content */
+    .content-blur {
+        filter: blur(5px);
+    }
+
+    /* Chat Header */
+    .chat_header2 {
+        font-size: 13px;
+        font-family: 'Roboto';
+        font-weight: 500;
+        color: #f3f3f3;
+        height: 55px;
+        background: #42a5f5;
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+        padding-top: 8px;
+        width: 60%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Login Link */
+    .login-link {
+        align-items: center;
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Icon Container */
+    .icon-container {
+        border: 1px solid white;
+        padding: 5px;
+        border-radius: 50%; /* Optional, if you want a circular border */
+    }
+
+    /* Font Awesome User Icon */
+    .fas.fa-user {
+        color: white;
+        font-size: 14px; /* Adjust the size as needed */
+    }
+
+    /* Chat Option */
+    .chat_option2 {
+        float: left;
+        font-size: 15px;
+        list-style: none;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        text-align: relative;
+        margin-right: 10px;
+        letter-spacing: 0.5px;
+        font-weight: 400;
+    }
+
+    /* Chat Option Image */
+    .chat_option2 img {
+        border-radius: 50%;
+        width: 65px;
+        float: left;
+        margin: -30px 20px 10px 20px;
+        border-bottom: 2px solid white;
+        border-left: 3px solid white;
+        border-right: 3px solid white;
+    }
+
+    /* Chat Fullscreen Loader */
+    .chat_fullscreen_loader2 {
+        float: right;
+        cursor: pointer;
+        font-size: 20px;
+        opacity: 0.5;
+        margin: -10px 10px;
+    }
+
+    /* Floating Action Button Icon */
+    .fab2 i {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* General Button Styles */
+    .btn {
+        color: aliceblue;
+        padding: 5px;
+        background-color: DimGrey;
+        box-shadow: 0 0 15px rgba(0, 1, 1, 1.15);
+        border-radius: 30px;
+        font-size: 13px;
+    }
+
+    /* Dropdown Item */
+    .dropdown-item {
+        font-family: 'Eagle Lake';
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        border: none;
+        padding: 5px;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    /* Navbar Brand */
+    .navbar-brand a {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    /* Navbar Menu */
+    .navbar-menu {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Navbar Links */
+    .navbar-links {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-links li {
+        margin-left: 20px;
+    }
+
+    .navbar-links a {
+        transition: color 0.3s;
+        color: white;
+    }
+
+    .navbar-links a:hover {
+        width: 100%;
+        border-radius: 10px;
+        color: navy;
+        background-color: aliceblue;
+        padding: 5px;
+    }
+
+    /* Navbar Toggle */
+    .navbar-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .navbar-toggle .bar {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        margin: 4px 0;
+        transition: all 0.3s;
+    }
+
+    /* Responsive Media Query */
+    @media (max-width: 768px) {
+        .box_text p {
+            font-size: 8px;
+            line-height: 35px;
+            font-weight: 400;
+            text-align: left;
+            color: #181716;
+            padding-right: 20px;
+        }
+
+        .slider_section {
+            padding-top: 50px;
+        }
+
+        /* Navbar Overlay */
+        .nav-overlay {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-overlay.active {
+            display: block; /* Show when active */
+        }
+
+        /* Navbar Menu for Mobile */
+        .navbar-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .navbar-menu.active {
+            display: flex;
+        }
+
+        /* Navbar Links for Mobile */
+        .navbar-links {
+            flex-direction: column;
+            width: 100%;
+            margin: 0;
+            border-radius: 10px;
+            background-color: gray;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.15);
+        }
+
+        .navbar-links li {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Navbar Toggle for Mobile */
+        .navbar-toggle {
+            display: flex;
+        }
+
+        /* Index Row for Mobile */
+        .index-row {
+            position: relative;
+            background-image: url('/static/images/public/bv.webp');
+            height: 600px;
+            background-size: cover;
+            padding: 0px 0px;
+        }
+    }
+      .take-up-to-30-off-select-cour-wrapper1 {
+      background-color: #03c7e8; /* Light background color */
+      border-radius: 10px; /* Rounded corners */
+      padding: 20px; /*21 Add padding for spacing */
+    }
+
+    .button7:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    /* General Body and HTML Styles */
+}
+
+</style>
+<script>
+    // Cookie Popup
+document.addEventListener("DOMContentLoaded", function () {
+    var cookiePopup = document.getElementById('cookie-popup');
+    var acceptButton = document.getElementById('accept-cookie');
+
+    var cookiesAccepted = localStorage.getItem('cookiesAccepted');
+
+    if (!cookiesAccepted) {
+        cookiePopup.style.display = 'block';
+    }
+    acceptButton.addEventListener('click', function () {
+        cookiePopup.style.display = 'none';
+        localStorage.setItem('cookiesAccepted', true);
+    });
+});
+
+// Close Welcome and Popup Functions
+function closeWelcomeBox() {
+    document.getElementById('welcomeOverlay').style.display = 'none';
+}
+
+function closePopup() {
+    document.querySelector('.popup-container').style.display = 'none';
+}
+
+function closePopup2() {
+    document.querySelector('.take-up-to-30-off-select-cour-wrapper1').style.display = 'none';
+}
+
+// Mobile Menu Toggle
+const mobileMenu = document.getElementById('mobile-menu');
+const navbarMenu = document.querySelector('.navbar-menu');
+const navOverlay = document.getElementById('Nav-overlay');
+
+mobileMenu.addEventListener('click', () => {
+    navbarMenu.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+});
+
+// Auto-dismiss Alerts
+document.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach((alert) => {
+            let bootstrapAlert = new bootstrap.Alert(alert);
+            bootstrapAlert.close();
+        });
+    }, 3000); // 3000 milliseconds = 3 seconds
+});
+
+// Fade Out Message Alerts
+const messageAlerts = document.querySelectorAll('.message-alert');
+
+messageAlerts.forEach((alert) => {
+    setTimeout(() => {
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+        setTimeout(() => {
+            alert.remove();
+        }, 500); // 500 milliseconds for the fade-out animation
+    }, 5000); // 5000 milliseconds (5 seconds) before starting to fade out
+});
+
+</script>
+
+            </div>
+            </div>
+            </div>
+</body>
+
+
+
+<body>
+
+      </section>
+
+    {% block content %}
+    {% endblock content %}
+<div class="popup-container" id="cookie-popup">
+    <button type="button" class="btn-close" onclick="closePopup()" style="float: right;"></button>
+    <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+    <button class="button7" style="padding: 0 5px 2px 5px;" id="accept-cookie">
+        <i>I Accept</i>
+    </button>
+</div>
+
+<span class="alert2" style="position: absolute; top: 90px; right: 60px; opacity: 0.9;">
+    <div class="take-up-to-30-off-select-cour-wrapper1">
+        <a type="button" style="float: right; top: -15px; position: relative;" onclick="closePopup2()">
+            <img class="button-img" alt="close" src="{% static 'images/public/button--img.svg' %}" />
+        </a>
+
+        <div class="take-up-to-container1">
+            <span class="take-up-to1">Take up to 30% off select Templates. <br> Use code
+                <b class="edxspring24">EDXSPRING24</b>
+            </span>
+            <span>until April 30.</span>
+        </div>
+
+        <a href="#" class="">Save now.</a>
+    </div>
+</span>
+</body>
+
+</html>

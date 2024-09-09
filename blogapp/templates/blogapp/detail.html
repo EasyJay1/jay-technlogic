@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-lg-8 p-4" >
+    <!-- Post content-->
+    <article>
+        <!-- Post header-->
+        <header class="mb-4">
+            <!-- Post title-->
+            <h5 class="fw-bolder mb-1">{{blog.title}}!</h5>
+
+            {% for cat in blog.category.all %}
+            <a class="explore-link bg-primary text-decoration-none link-light" href="{% url 'download_pdf' %}">
+                <h5 class="fas fa-download"> Download Documentation PDF</h5>
+            </a>
+            {% endfor %}
+        </header>
+        <!-- Preview image figure-->
+        <figure class="mb-4"><img class="img-fluid rounded" src="{{blog.image.url}}" alt="..." /></figure>
+
+        <span id="spinner" >
+              <div class="spinner-grow spinner-grow-md text-primary" role="status"></div>
+        </span>
+        <span ><a href="{{blog.site_link}}">Open web Interface</a> | <strong>Amount:</strong> <i>$0</i></span>
+
+
+        <!-- Post content-->
+        <section class="mb-5">
+            <p class="fs-5 mb-4">{{blog.body | linebreaks }}</p>
+        </section>
+    </article>
+    <!-- Comments section-->
+
+</div>
+
+{% endblock content %}

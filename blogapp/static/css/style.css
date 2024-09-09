@@ -1,0 +1,518 @@
+.button7 {
+  cursor: pointer;
+  border: none;
+      border-radius: 28px;
+  padding: var(--padding-5xs) var(--padding-mini) var(--padding-5xs)
+    var(--padding-base);
+  background-color: gray;
+  width: 83.5px;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+  .socialaccount_providers {
+    list-style-type: none;
+    margin-bottom: 10px;
+  }
+  .login {
+    padding: 20px;
+    width: 70%;
+    opacity: 0.9;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+    border-radius: 28px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 10.1);
+  }
+    .alt {
+    color:white;
+    }
+
+  .login label {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .login input[type="email"],
+  .login input[type="text"],
+  .login input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
+
+
+
+.vertical-line {
+    border-left: 1px solid #000;
+    border-radius: 5%;
+    width: 100%;
+    height: 100%;
+  }
+
+button:hover {
+    background-color: gray;
+}
+.countdown {
+  width: 50px;
+  display: flex;
+  font-family: Arial, sans-serif;
+  margin-top: -170px;
+  margin-left: 84px;
+    transform: rotate(3deg);
+    writing-mode: horizontal-tb;
+
+
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
+
+.timer span {
+  display: inline-block;
+  width: 20px;
+  height: 30px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  margin: 0 6px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.days, .hours, .minutes, .seconds {
+  animation: countdown 1s linear infinite;
+}
+
+@keyframes countdown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+        .repository-heading {
+            background-color: lightgray;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 10.1);
+        }
+
+
+.body {
+    font-family: Arial, sans-serif;
+    margin-left: 10;
+    padding: 10;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 10.1);
+    background-image: linear-gradient(to top,white,white, #263835,
+    #263835);}
+
+.terms-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+}
+
+.last-updated {
+    text-align: right;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+.section-title {
+    margin-top: 20px;
+}
+
+.disclaimer {
+    margin-top: 40px;
+    color: #888;
+}
+
+
+
+
+
+
+######################################
+    .footer {
+        padding: 40px 0;
+        background-color: #f8f9fa;
+        text-align: center; /* Center all items */
+    }
+
+    .footer .container {
+        margin: auto;
+    }
+
+    .footer h4 {
+        margin-bottom: 20px;
+    }
+
+    .footer ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer .social-icons {
+        display: flex;
+        justify-content: center; /* Center social icons */
+    }
+
+    .footer .social-icons li {
+        margin-right: 10px;
+    }
+
+    .footer .footer-info p {
+        margin-bottom: 5px;
+    }
+
+
+    /* For the vertical line */
+    .footer .col-md-3::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1px; /* Width of the vertical line */
+        background-color: black /* Color of the vertical line */
+    }
+
+
+        /* Add custom styles here */
+        .social-icons {
+            list-style-type: none;
+            padding: 0;
+        }
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #263835;
+            text-align: center;
+            line-height: 35px;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .social-icons a:hover {
+            background-color: #0056b3; /* Change the background color on hover */
+        }
+
+
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.contact-us a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-us a:hover {
+  color: gray;
+  text-decoration: none;
+}
+
+.button {
+    background-color: lightblue;
+    color: navy;
+    width: auto;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px 10px; /* Adjust padding as needed */
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1.15), 0 1px 3px rgba(0, 0, 0, 1.15);
+
+}
+
+.columna button.active {
+    background-color: gray;
+    color: white;
+}
+
+
+.software-container {
+    text-align: center;
+
+
+}
+
+.tagline {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.features {
+    margin-bottom: 20px;
+}
+
+.features h2 {
+    margin-bottom: 10px;
+}
+
+.features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features li {
+    margin-bottom: 10px;
+}
+
+
+
+.explore-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1.15), 0 1px 3px rgba(0, 0, 0, 1.15);
+    transition: background-color 0.3s;
+}
+
+.explore-link:hover {
+    background-color: #0056b3;
+    color: #007bff;
+    text-decoration: none;
+
+}
+
+    .wrapper {
+        display: inline-block;
+    }
+.overlay-button {
+  position: absolute;
+  top: 60%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 1.15), 0 1px 3px rgba(0, 0, 0, 1.15);
+  cursor: pointer;
+  width: 50%;
+  border-radius: 15px;
+  padding: 0px 0px;
+  background-color: #007bff;
+  color: white;
+}
+
+.overlay-button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity as needed */
+}
+
+
+
+    .container {
+        display: flex;
+    }
+
+    .column {
+        flex-basis: 50%; /* Adjust width according to your needs */
+    }
+    .comment {
+        font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+
+        h2 {
+            font-size: 15x;
+        }
+        h5 {
+            font-size: 15px;
+        }
+        .comment {
+            font-size: 10px;
+        }
+
+        p {
+            font-size: 15px;
+        }
+        i {
+            font-size: 15px;
+        }
+
+
+        .column {
+            flex-basis: 90%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .image-link {
+    display: inline-block;
+    position: relative;
+    width: 70%; /* Adjust as needed */
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.gif-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.overlay-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+
+    .containerimg {
+      width: 100%;
+      height: 15.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .containerimg img {
+      width: 100%;
+      height: 100%;
+      border-top-left-radius: 25px; /* Radius for bottom left corner */
+      border-top-right-radius: 25px; /* Radius for bottom right corner */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark opacity */
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    overflow-wrap: break-word; /* Wrap text when it overflows */
+}
+
+    .nav-item .dropdown-menu{
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 2.12);
+    }
+.section-title {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+
+
+    /* CSS for the chat box */
+    .chat-box {
+      position: fixed;
+      bottom: 20px;
+      right: 0px;
+      width: 300px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .chat-header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chat-body {
+      padding: 10px;
+    }
+
+    .chat-form {
+      display: none;
+    }
+
+    .chat-form textarea {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .chat-form button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chat-button {
+      position: fixed;
+      bottom: 5px;
+      right: 20px;
+      color: #fff;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .chat-button img {
+      max-width: 150%;
+      max-height: 150%;
+    }
+
+
+        .search-container {
+            position: relative;
+            width: 80%; /* Adjust width as needed */
+            margin: 0 auto; /* Center the container */
+            border-radius: 25px;
+            background-color: #263835;;
+        }
+
+        #primary-search {
+            width: calc(100% - 40px);
+            padding-right: 40px; /* Adjust padding to accommodate the search icon */
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+

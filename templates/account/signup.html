@@ -1,0 +1,119 @@
+{% extends "base_accounts.html" %}
+{% load i18n %}
+{% load static %}
+{% load socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid justify-content-center" style='padding-top:50px;'>
+            <div class="over-pack">
+            <div class="packs">
+            <div class="ring">
+                <i style="--clr:#ff0057;"></i>
+                <i style="--clr:#fffd44;"></i>
+                <i style="--clr:#0000ff;"></i> <!-- Blue -->
+                <div class="login">
+                    <p style="font-family: 'Eagle Lake'; color: #4285f4;">Get Started!</p>
+                <div class="social-login text-center ">
+                    <a href="{% provider_login_url 'google' %}" class="google">
+                        <img width="50" class="icon-link" loading="lazy" alt="Link 1" src="{% static 'img/goo.png' %}"
+                        style="border-radius: 50%;">
+                    </a>
+                    <a href="#" class="facebook">
+                        <img class="icon-link" loading="lazy" alt="Link 1" src="{% static 'images/public/item--link.svg' %}" /> <!-- Font Awesome icon for Facebook -->
+                    </a>
+                    <a href="#" class="git">
+                        <img width="40" class="icon-link" loading="lazy" alt="Link 1" src="{% static 'img/git2.png' %}"/>
+                    </a>
+                </div>
+
+                    <div class="inputBx">
+<div class="register-container">
+    <form action="{% url 'register' %}" method="POST" class="register-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="half-width">
+                <label for="first-name">First Name</label>
+                {{ form.first_name }}
+            </div>
+            <div class="half-width">
+                <label for="last-name">Last Name</label>
+                {{ form.last_name }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            {{ form.phone_number }}
+        </div>
+        <div class="form-group">
+            <div class="half-width">
+                <label for="password">Password</label>
+                {{ form.password }}
+            </div>
+            <div class="half-width">
+                <label for="confirm-password">Confirm Password</label>
+                {{ form.confirm_password }}
+            </div>
+        </div>
+                                    <span class="form-check">
+                                <label class="form-check-label" for="checkin" required>
+                                    I Accept Terms
+                                </label>
+                                {% if form.errors.checkin %}
+                                <div class="invalid-feedback">
+                                    {{ form.errors.checkin }}
+                                </div>
+                                {% endif %}
+                                <input class="k" type="checkbox" id="checkin" name="checkin" value="I Accept Terms & Conditions" required>
+                            </span>
+
+        <button type="submit" class="btn-register">Register</button>
+
+        {{ form.email.errors}}
+        {{ form.non_field_errors}}
+    </form>
+</div>
+
+                            <style>
+                                .form-check {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: flex-start;
+                                    margin-bottom: 0rem;
+                                }
+
+                                .k {
+                                    margin-bottom: 0rem;
+                                    top: -1rem;
+                                }
+
+                                .invalid-feedback {
+                                    display: block;
+                                    color: #dc3545; /* This color can be adjusted as per your theme */
+                                }
+                            </style>
+                        </form>
+                    </div>
+                        <div class="links">
+                            <a href="{% url 'account_login' %}"><p>Already Have An Account? Sign in</p></a>
+                        </div>
+
+                </div>
+            </div>
+            </div>
+            </div>
+    </div>
+  <script>
+    document.getElementById('login_form').addEventListener('submit', function () {
+      document.getElementById('submit-btn').disabled = true;
+      document.getElementById('please-wait-message').style.display = 'flex';
+    });
+  </script>
+
+{% endblock %}

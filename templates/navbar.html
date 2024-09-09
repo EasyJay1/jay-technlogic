@@ -1,0 +1,207 @@
+
+{% load static %}
+
+<div id="top-navbar" style="background-color: navy; color: white;" >
+
+	<div class="container">
+		<div class="nav-wrapper">
+			<form class="form-header" action="{% url 'query' %}" method="GET">
+				<div style="float: left; padding-right: 10px;">
+					<div class="toggle-btn" onclick="toggleSidebar()">
+						<i class="fas fa-bars" style="font-size: 34px;"></i>
+					</div>
+				</div>
+				<input id="primary-search" class="au-input au-input--xl" type="text" name="q" value="{{ request.GET.q }}"
+					placeholder="Search All... #Subject, #program, #Quiz, #News, #Events" required style="padding: 10px 20px;
+					height: 40px; border-radius: 40px; font-size: 16px;" />
+                <button class="au-btn--submit" type="submit" style="height: 40px;" >
+                    <i class="fas fa-search" style="color: DeepSkyBlue; font-size: 16px;"></i>
+                </button>
+				<div class="dropdown">
+					{% if request.user.is_lecturer or request.user.is_student or request.user.is_superuser %}
+
+					<button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<img class="profile-pic" src="{{ request.user.picture.url }}">
+						<i class="name" style="background-color: green; color: white; font-weight: bold;
+						border-radius: 50%; padding: 8px;">{{ request.user.first_name|slice:"1"|upper }}</i>
+					</button>
+					<div class="dropdown-menu" style="min-width: 14rem !important;" aria-labelledby="dropdownMenuButton">
+						<p class="container text-muted-xs text-center">
+							Last login: {{ request.user.last_login|date }}</p>
+
+						{% if request.user.is_lecturer or request.user.is_student %}
+						<a class="dropdown-item" href="{% url 'user_course_list' %}"><i class="fas fa-book"></i>My
+							Subjects</a>
+						{% endif %}
+
+						{% if request.user.is_superuser %}
+						<a class="dropdown-item" href="{% url 'admin_panel' %}"><i class="fas fa-user-tie"></i>Admin
+							Panel</a>
+						{% else %}
+						{% if request.user.is_student %}
+
+						<a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user"></i>Profile</a>
+						{% endif %}
+						{% endif %}
+
+						<hr>
+						<div style="display: flex; justify-content: center; align-items: center;">
+							<a class="btn btn-secondary" href="{% url 'logout' %}">
+								<i class="fas fa-sign-out-alt"></i> Signout
+							</a>
+						</div>
+					</div>
+					{% else %}
+					<li> <a href="{% url 'login' %}" class="button">LOGIN</a>
+					</li>
+					{% endif %}
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+                        <div style="padding-top: 20px;"></div>
+<style>
+
+/* Style the top navigation bar */
+#top-navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+/* Style the navigation wrapper */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style the toggle button for the sidebar */
+.toggle-btn {
+    cursor: pointer;
+}
+
+/* Style the search form */
+.form-header {
+    flex-grow: 1;
+    display: flex;
+}
+
+#primary-search {
+    flex-grow: 5;
+    padding: 2px;
+    border: 2px solid green;
+    border-radius: 90px;
+    font-size: 18px;
+}
+
+.au-btn--submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.au-btn--submit:hover {
+    background-color: #0056b3;
+}
+
+/* Style the user dropdown */
+.dropdown {
+    position: relative;
+    margin-left: 20px;
+}
+
+.btn.dropdown-toggle {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    border-radius: 20px;
+    padding: 10px;
+    display: none;
+    z-index: 1;
+}
+
+/* Style the dropdown items */
+.dropdown-item {
+    display: block;
+    padding: 8px 0;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-item:hover {
+    background-color: #f4f4f4;
+}
+
+/* Style the "LOGIN" button */
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #0056b3;
+        color: white;
+
+}
+
+/* Add some spacing */
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+/* Media query for responsive design (adjust breakpoints as needed) */
+@media (max-width: 768px) {
+    .nav-wrapper {
+        flex-direction: column;
+    }
+    .form-header {
+        margin-top: 10px;
+    }
+    .dropdown-menu {
+        top: auto;
+        bottom: -100%;
+    }
+}
+
+</style>
+<script>
+    const searchInput = document.getElementById('primary-search');
+
+    searchInput.addEventListener('input', () => {
+        if (searchInput.value.trim() !== '') {
+            searchInput.style.borderColor = 'red'; // Change the border color to red
+        } else {
+            searchInput.style.borderColor = '#ccc'; // Restore the default border color
+        }
+    });
+</script>
